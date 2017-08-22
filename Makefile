@@ -1,0 +1,4 @@
+all:singly_linkedlist doubly_linkedlist circular_linkedlist
+
+clean:
+	rm singly_linkedlist doubly_linkedlist circular_linkedlist
