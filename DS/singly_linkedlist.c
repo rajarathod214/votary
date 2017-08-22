@@ -187,6 +187,12 @@ else
 }
 
 
+void find_nth_node_from_last()
+{
+	
+
+}
+
 
 int main()
 {
