@@ -1,4 +1,4 @@
-all:singly_linkedlist Doubly_linkedlist
+all:singly_linkedlist doubly_linkedlist circular_linkedlist
 
 clean:
-	rm singly_linkedlist Doubly_linkedlist
+	rm singly_linkedlist doubly_linkedlist circular_linkedlist
