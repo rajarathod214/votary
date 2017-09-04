@@ -1,0 +1,4 @@
+all:hello stack_using_array stack_using_array1 stack_using_linkedlist stack_using_linkedlist1 Queue_using_array Queue_using_array1 Queue_using_linkedlist
+
+clean:
+	rm hello stack_using_array stack_using_array1 stack_using_linkedlist stack_using_linkedlist1 Queue_using_array Queue_using_array1 Queue_using_linkedlist
