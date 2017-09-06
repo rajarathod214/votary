@@ -54,9 +54,11 @@ void display()
 	{
 		while(temp)
 		{
-			printf("|%d|(%p)|%p|-->",temp->data,temp,temp->link);
+			//printf("|%d|(%p)|%p|-->",temp->data,temp,temp->link);
+			printf("%d-->",temp->data);
 			temp=temp->link;
 		}
+		printf("\n");
 	}
 
 }
@@ -222,7 +224,7 @@ void find_nth_node_from_last(int pos1)
 	
 }
 
-void total_node()
+int total_node()
 {
 	struct emp *temp=start;
 	int count=0;
@@ -231,7 +233,7 @@ void total_node()
 	if(temp==NULL)
 	{
 		printf("\n List is empty\n");
-		return;
+		return 0 ;
 	}
 
 	while(temp)
@@ -243,6 +245,7 @@ void total_node()
 
 	printf("\n Total node = %d \n",count);
 	
+	return count;	
 }
 
 
@@ -275,33 +278,88 @@ void find_position_from_first(int edata)
 		printf("\n No %d data found \n",edata);
 }
 
-void asending_order()
+struct emp* asending_order()
 {
-	struct emp *temp=start;
+	struct emp *temp=start,*q=start;
 	
-	int temp1;
-
-	if(temp==NULL)
+	int temp1,count,i,j;
+	
+	count=total_node();
+	printf("cnt:%d\n",count);
+	if(q==NULL)
 	{
 		printf("\n List is empty \n");
-		return;
+		return NULL;
 	}
 
-
-	while(temp)
+/*
+	while(temp->link)
 	{
-		if(temp->data > temp->link->data)
+		if(temp->link != NULL)
 		{
-			temp1=temp->data;
-			temp->data=temp->link->data;
-			temp->link->data=temp1;
+			if((temp->data) > (temp->link->data))
+			{
+				temp1=temp->data;
+				temp->data=temp->link->data;
+				temp->link->data=temp1;
+			}
+			
 		}
-		printf("[%d(%p)|%p]-->",temp->data,temp,temp->link);
-		
-		temp=temp->link;
+			temp=temp->link;
 	}
+
+	return temp;
+*/
+
+	temp=q;
+	for(i=0;i<count-1;i++)
+	{	for(j=0;j<count-i-1;j++)
+		{
+			if((temp->link!=NULL))
+			if((temp->data)>(temp->link->data))
+			{
+	                        temp1=temp->data;
+        	                temp->data=temp->link->data;
+                	        temp->link->data=temp1;
+      			}
+			temp=temp->link;
+		}
+			temp=q;	
+	}		
+
+	return temp;
+
+
+
+
+
+
+
+
+
+
+/*
+	while(temp->link)
+	{
+		temp5=temp->link;
 		
-	
+			while(temp5->link->link)
+			{
+				if(temp5->data > temp5->link->data)
+				{
+					temp1=temp5->data;
+					temp5->data=temp5->link->data;
+					temp5->link->data=temp1;
+				}
+		
+		
+			printf("[%d(%p)|%p]-->",temp5->data,temp5,temp5->link);
+		
+			temp=temp->link;
+
+			}
+	}
+*/	
 }
 
 
@@ -344,6 +402,7 @@ while(1)
 
 	printf("\n Enter your choice:");
 	scanf("%d",&choice);
+	
 
 	switch(choice)
 	{
@@ -392,7 +451,7 @@ while(1)
 		find_position_from_first(edata);
 		break;
 	
-	case 11: asending_order();
+	case 11: start=asending_order();
 		 break;
 	
 	case 12: exit(0);
@@ -401,7 +460,6 @@ while(1)
 			
 	
 	}
-
 
 }
 }
