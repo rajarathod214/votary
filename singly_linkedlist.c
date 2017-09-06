@@ -9,7 +9,7 @@ struct emp
 
 }*start;
 
-
+/**************************************** Creation of Nodes ******************************************/
 void create()
 {
 	struct emp *temp,*q;
@@ -37,6 +37,7 @@ void create()
 	}
 }
 
+/**************************************** Display of Nodes ******************************************/
 
 void display()
 {
@@ -54,7 +55,7 @@ void display()
 	{
 		while(temp)
 		{
-			//printf("|%d|(%p)|%p|-->",temp->data,temp,temp->link);
+		//	printf("|%d|(%d)|%d|-->",temp->data,temp,temp->link);
 			printf("%d-->",temp->data);
 			temp=temp->link;
 		}
@@ -62,6 +63,8 @@ void display()
 	}
 
 }
+
+/**************************************** Reversing node  ******************************************/
 
 
 struct emp *reverse(struct emp *p)
@@ -81,6 +84,7 @@ struct emp *reverse(struct emp *p)
 	
 return q;
 }
+/**************************************** Reverse with recursion **************************************/
 
 struct emp *recursive_reverse(struct emp *p)
 {
@@ -103,6 +107,8 @@ struct emp *recursive_reverse(struct emp *p)
 
 }
 
+/**************************************** Add Node at begining ******************************************/
+
 void add_node_at_begining()
 {
 	struct emp *temp;
@@ -122,6 +128,7 @@ void add_node_at_begining()
 	start=temp;
 }
 
+/**************************************** Add node after given position *********************************/
 
 void add_node_after(int position)
 {
@@ -146,6 +153,7 @@ void add_node_after(int position)
 }
 
 
+/**************************************** Deletion of Nodes ******************************************/
 void delete_node(int edata)
 {
 	struct emp * q, *temp;
@@ -188,6 +196,7 @@ else
 
 }
 
+/****************************************  Find Nth node from last ****************************************/
 
 void find_nth_node_from_last(int pos1)
 {
@@ -224,6 +233,8 @@ void find_nth_node_from_last(int pos1)
 	
 }
 
+/**************************************** Total Number of nodes **************************************/
+
 int total_node()
 {
 	struct emp *temp=start;
@@ -248,6 +259,7 @@ int total_node()
 	return count;	
 }
 
+/**************************************** Find node position from first ***********************************/
 
 void find_position_from_first(int edata)
 {
@@ -278,106 +290,124 @@ void find_position_from_first(int edata)
 		printf("\n No %d data found \n",edata);
 }
 
+/**************************************** Sorting in asending ************************/
+
 struct emp* asending_order()
 {
-	struct emp *temp=start,*q=start;
+	struct emp *temp=start;
 	
-	int temp1,count,i,j;
+	int temp1,count=0,i,j;
 	
-	count=total_node();
+//	count=total_node();
 	printf("cnt:%d\n",count);
-	if(q==NULL)
+	if(temp==NULL)
 	{
 		printf("\n List is empty \n");
 		return NULL;
 	}
 
-/*
-	while(temp->link)
+	/* Total node count */
+
+	while(temp)
 	{
-		if(temp->link != NULL)
+			count++;
+		temp=temp->link;
+	}
+
+	printf("\n count = %d \n",count);
+
+	temp=start;
+
+
+	for(i=0;i<count;i++)
+	{
+		for(j=0;j<count-i;j++)
 		{
-			if((temp->data) > (temp->link->data))
+			if(temp->link != NULL)
+			if((temp->data)>(temp->link->data))
 			{
 				temp1=temp->data;
 				temp->data=temp->link->data;
 				temp->link->data=temp1;
 			}
 			
-		}
 			temp=temp->link;
+		}// End of j loop (outer)
+		
+		temp=start;
+	}//End of i loop (inner)
+
+//	return temp;
+
+}
+
+/**************************************** Delete a middle node* ************************/
+
+void delete_middle_node()
+{
+	struct emp *temp=start,*temp1,*p,*q;
+//	int count=0,i;
+
+
+	if(temp==NULL)
+	{
+		printf("\n List is empty \n");
+		return;
+	}
+	
+	else if(temp->link == NULL)
+		{
+			printf("\n Only one node is present \n");
+			return;
+		}
+
+
+	p=q=start;	
+
+
+	while((q->link != NULL)&&(q->link->link!=NULL))
+	{
+		temp1=p;
+		p=p->link;
+		q=q->link->link;
 	}
 
-	return temp;
-*/
-
-	temp=q;
-	for(i=0;i<count-1;i++)
-	{	for(j=0;j<count-i-1;j++)
-		{
-			if((temp->link!=NULL))
-			if((temp->data)>(temp->link->data))
-			{
-	                        temp1=temp->data;
-        	                temp->data=temp->link->data;
-                	        temp->link->data=temp1;
-      			}
-			temp=temp->link;
-		}
-			temp=q;	
-	}		
-
-	return temp;
-
-
-
-
-
-
-
-
+	temp1->link=p->link;
+	free(p);
+	p=NULL;
+	
 
 
 /*
-	while(temp->link)
+	while(temp)
 	{
-		temp5=temp->link;
-		
-			while(temp5->link->link)
-			{
-				if(temp5->data > temp5->link->data)
-				{
-					temp1=temp5->data;
-					temp5->data=temp5->link->data;
-					temp5->link->data=temp1;
-				}
-		
-		
-			printf("[%d(%p)|%p]-->",temp5->data,temp5,temp5->link);
-		
-			temp=temp->link;
-
-			}
+		temp=temp->link;
+		count++;
 	}
-*/	
+
+	
+	temp=start;
+
+	for(i=1;i<(count/2);i++)
+	{
+		temp=temp->link;
+		printf("\n %d\t\n ",temp);
+	}
+
+	
+		temp1=temp->link;
+		temp->link=temp->link->link;
+		temp=temp->link;
+		free(temp1);
+
+	
+*/
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+/**************************************** Main function ********************************/
 
 int main()
 {
@@ -397,7 +427,8 @@ while(1)
 	printf("\t 9. Total nodes\n ");
 	printf("\t 10.find_position_from_first\n ");
 	printf("\t 11.Asending_order\n");
-	printf("\t 12.Exit \n");
+	printf("\t 12.Delete a middle node \n");
+	printf("\t 13.Exit \n");
 	printf("\n*******************************************\n");
 
 	printf("\n Enter your choice:");
@@ -451,10 +482,13 @@ while(1)
 		find_position_from_first(edata);
 		break;
 	
-	case 11: start=asending_order();
+	case 11:asending_order();
 		 break;
 	
-	case 12: exit(0);
+	case 12:delete_middle_node();
+		 break;
+
+	case 13: exit(0);
 
 	default: printf("\n Please enter correct choice \n");
 			
